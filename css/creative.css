@@ -429,3 +429,7 @@ body {
     vertical-align: middle;
     float: none;
 }
+
+.red {
+  color: red;
+}
