@@ -66,6 +66,12 @@
                         <a class="page-scroll" href="#requirements">Requirements</a>
                     </li>
                     <li>
+                        <a class="page-scroll" href="#architecture">Architecture</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#use-cases">Use Cases</a>
+                    </li>
+                    <li>
                         <a class="page-scroll" href="#team">Team</a>
                     </li>
                 </ul>
@@ -175,7 +181,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Technical Specifications</h2>
-                    <p>2.4 GHz BLE + 2.4 GHz Wifi</p>
+                    <p>2.4 GHz Wifi</p>
                     <hr class="primary">
                 </div>
             </div>
@@ -232,12 +238,12 @@
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
                             <div class="project-name">
-                                Ubuntu 16.04
+                                InfluxDB
                             </div>
                             <div class="project-category text-faded">
-                                 Supports ARM processors (RPi)
+                                 Open Source write optimized time series database
                                  <br>
-                                 Open Source + Community Package Support
+                                 Supports aggregation queries such as mean and std dev
                                  <br>
                                  <a href="https://wiki.ubuntu.com/ARM/RaspberryPi" target="_blank" class="btn btn-primary btn-small">
                                     <i class="fa fa-link" aria-hidden="true"></i>
@@ -361,7 +367,7 @@
                 </div>
             </div>
             <div class="row no-gutter">
-                <div class="col-lg-2 col-sm-6 portfolio-box">
+                <div class="col-lg-3 col-sm-6 portfolio-box">
                 </div>
                 <div class="col-lg-3 col-sm-6 portfolio-box">
                     <img src="img/portfolio/fullsize/5.jpg" class="img-responsive" alt="">
@@ -398,27 +404,6 @@
                                  <br>
                                  <a href="https://www.sparkfun.com/products/8958" target="_blank" class="btn btn-primary btn-small">
                                     $14.95 <i class="fa fa-link" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 portfolio-box">
-                    <img src="img/portfolio/fullsize/7.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-name">
-                                LightBlue Bean
-                            </div>
-                            <div class="project-category text-faded">                           
-                                 Atmega328p microprocessor
-                                 <br>
-                                 LBM313 Bluetooth Low Energy
-                                 <br>
-                                 8 MHz clock speed
-                                 <br>
-                                 <a href="https://www.adafruit.com/product/2732" target="_blank" class="btn btn-primary btn-small">
-                                    $39.95 <i class="fa fa-link" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
@@ -510,7 +495,44 @@
             </div>
         </div>
     </section>
+    <section id="architecture" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Architecture</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-sm-6">
+                    <img src="img/arc_diagram.jpg" class="img-responsive" alt="">
+                </div>
+                 <div class="col-lg-6 col-sm-6">
+                    <p>Every piece of sensor data originates at a sensor and is sent over to the Atmega via the specific protocol for that sensor, ADC for IR and sound, and SPI for the accelerometer. From there, the Atmega sends the data to the Rpi via I2C. The reciever on the Pi caches a local copy in Redis as well as offloading another copy to the server. The server then saves it to our time series InfluxDB. The celery jobs then see new data is available and start to stream process it, saving it in Postgres after completion. Lastly, the map and metrics server queries Postgres to finally display the data in a meaningful way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section id="use-cases" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Use Cases</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-sm-6">
+                    <h3><strong>Road Repair</strong></h3> - by utilizing the pothole detection feature on the platform, city officials can see the road conditions through their city. The heatmap highlights places where road conditions need to be improved.
+                    <h3><strong>Air Pollution Detection</strong></h3> - by utilizing the air particle detector on the platform, city officials can see air pollution levels throughout a city in order to enforce stricter emission regulations. (not implemented)
+                </div>
+                 <div class="col-lg-6 col-sm-6">
+                    <h3><strong>Noise Pollution Detection</strong></h3> - by utilizing the sound detector on the platform, city officials can see noise levels throughout a city in order to enforce stricter sound restrictions. For example, banning car horns after 9 pm.
+                </div>
+            </div>
+        </div>
+    </section>
     <!--
     <section id="contact">
         <div class="container">
